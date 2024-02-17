@@ -54,6 +54,7 @@ export const ButtonReg = styled.button`
   border-radius: 6px;
   border: 1px solid;
 	color: #ffffff;
+	font-family: "Gill Sans", sans-serif;
 	font-weight:700;
 	font-size:18px;
 	background-color:#9f8c54;
@@ -66,6 +67,7 @@ export const ButtonLog = styled.button`
 	padding: 10px 20px;
   margin-top: 5px;
   font-size: 14px;
+	font-family: "Gill Sans", sans-serif;
   border-radius: 6px;
   border: 1px solid;
 	color: #ffffff;
@@ -84,11 +86,11 @@ color:#050a38;
 text-shadow: rgb(165, 193, 224) 1px 2px 3px;
 `
 
-
 export const HomeLogin = styled(Links)`
 color: #ffffff;
 background-color:#9f8c54;
 font-family: "Gill Sans", sans-serif;
+font-size:22px;
 border: 1px solid #ffffff;
 margin-top: 40px;
   &:hover {

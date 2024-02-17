@@ -8,10 +8,11 @@ export const Links = styled(NavLink)`
   display: inline-block;
   text-decoration: none;
   margin-bottom: 6px;
-  margin-right: 8px;
+  margin-right: 2px;
   padding: 8px 16px;
   border-radius: 16px;
   font-weight: 700;
+	font-size:22px;
   color: #d9cdad;
 
   &.active {
