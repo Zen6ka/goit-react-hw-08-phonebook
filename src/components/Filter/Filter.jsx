@@ -1,31 +1,9 @@
-import { Input } from './Filter.styled'
 import { useDispatch, useSelector } from 'react-redux';
+import { Input, Title } from './Filter.styled'
 import { setFilter } from '../../redux/filterSlice';
 import { selectContacts, selectFilter } from '../../redux/selectors';
 
-// export function Filter({ filter, setFilter }) {
-// 	const handleFilterChange = (evt) => {
-// 	setFilter(evt.target.value);
-// };
-
-// export function Filter() {
-// 	const dispatch = useDispatch();
-// 	const handleFilterChange = (evt) => {
-// 		dispatch(setContactsFilter(evt.target.value));
-// };
-// 	return (
-// 		<Input
-// 			type="text"
-// 			name="filter"
-// 			placeholder="Search by name"
-// 			value={useSelector(getFilter)}
-// 			onChange={handleFilterChange}
-// 			disabled={useSelector(getContacts).length === 0}
-// 		/>
-// );
-// }
-
-export  function Filter() {
+export default function Filter() {
   const dispatch = useDispatch();
   const filter = useSelector(selectFilter);
   
@@ -33,14 +11,15 @@ export  function Filter() {
     dispatch(setFilter(evt.target.value.trim()));
   };
 
-  return (
+  return useSelector(selectContacts).length < 1 ? (
+    <Title>Add your first contact</Title>
+  ) : (
     <Input
       type="text"
       name="filter"
       placeholder="Search by name"
       value={filter}
       onChange={handleFilterChange}
-      disabled={useSelector(selectContacts).length === 0}
     />
   );
 }

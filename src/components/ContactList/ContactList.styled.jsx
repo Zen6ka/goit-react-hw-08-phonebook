@@ -1,43 +1,57 @@
 import styled from 'styled-components';
 
 export const ContactItems = styled.li`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: ${p => p.theme.spacing(3)};  
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 10px;
+  background-color: #f5f6f7;
+  padding-left: 10px;
+  border-radius: 24px;
 `;
 
 export const Contact = styled.span` 
-	margin-right: ${p => p.theme.spacing(2)}; 
-	color: ${p => p.theme.colors.white};
-	font-size: 16px;
-	font-weight: 500;
+ margin-right: 12px; 
+ color: #000;
 `;
 
-export const Button = styled.button` 
-	padding: ${p => p.theme.spacing(2)} ${p => p.theme.spacing(3)};
-	margin-left: ${p => p.theme.spacing(3)};  
-	font-size: 16px;
-	font-weight: 700;
-	border-radius: ${p => p.theme.radii.md};;
-	border: 1px solid ${p => p.theme.colors.gray};
-	background-color: ${p => p.theme.colors.bgbutton};
-	transition: all 200ms linear;
-		&:hover,
-		&:focus {
-		background-color: ${p => p.theme.colors.bgfocus};
-		border: 1px solid ${p => p.theme.colors.gray};
-} 
+export const Btn = styled.button`
+  @media only screen and (max-width: 600px) {
+    margin-right: 10px;
+  }
+  padding: 8px 16px;
+  margin-left: 1px;
+  font-size: 18px;
+  border-radius: 0 24px 24px 0;
+  border: 1px solid;
+  background-color: #f4f1de;
+  color: #000;
+  &:hover {
+    background: #e07a5f;
+    color: #f4f1de;
+    border:none;
+    border: 1px solid #e07a5f;
+  }
 `;
 
-export const NoContacts = styled.p`
-  font-size: 20px;
-  text-align: center;
+export const BtnEdit = styled.button`
+  padding: 8px 16px;
+  margin-left: 5px;
+  font-size: 18px;
+  border-radius: 24px 0 0 24px;
+  border: 1px solid;
+  background-color: #f4f1de;
+  color: #000;
+  &:hover {
+    background: #f2cc8f;
+    color: #a1712a;
+    border: 1px solid #f2cc8f;
+  }
 `;
 
 export const Text = styled.p`
 text-align: center;
-color: ${p => p.theme.colors.white};
-margin-top: ${p => p.theme.spacing(2)};;
-  margin-bottom: ${p => p.theme.spacing(3)};;  
+color: #fff;
+margin-top: 8px;
+  margin-bottom: 16px;  
 `;

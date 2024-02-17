@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
 export const Input = styled.input`
-	width: 300px;
-	padding: ${p => p.theme.spacing(3)};
-	margin-top: ${p => p.theme.spacing(4)};
-	margin-bottom: ${p => p.theme.spacing(4)};
-	border-radius: ${p => p.theme.radii.lg};;
-	border: 1px solid ${p => p.theme.colors.gray};
-	outline: 0;
-	background-color: ${p => p.theme.colors.white};
-	color: ${p => p.theme.colors.gray};
-	font-size: 16px;
-	font-weight: 500;
+  padding: 16px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border-radius: 24px;
+  border: none;
+  outline: 0;
+  background-color: #fff;
+`;
+
+export const Title = styled.h3`
+  color: #2e2d2dbc;
 `;
