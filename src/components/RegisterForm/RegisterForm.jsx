@@ -3,6 +3,10 @@ import { register } from '../../redux/auth/auth-fetch';
 import { Form, Input } from 'antd';
 import{ButtonReg} from '../../pages/Pages.styled'
 import { RegBlurWrap } from '../../pages/Pages.styled';
+import toast from 'react-hot-toast';
+import * as Yup from 'yup';
+import { Formik } from 'formik';
+
 
 export default function RegisterForm () {
   const [form] = Form.useForm();
@@ -39,6 +43,20 @@ export default function RegisterForm () {
       },
     },
   };
+
+	// const onRegisterSubmit = (values, action) => {
+	// 	dispatch(register(values))
+	// 		.then(() => {
+	// 			toast.success('Registration was successful!');
+	// 		})
+	// 		.catch(error => {
+	// 			toast.error('Oops, something went wrong! Try again later.');
+	// 			console.error('Registration failed:', error);
+	// 		})
+	// 		.finally(() => {
+	// 			action.resetForm();
+	// 		});
+	
   return (
     <RegBlurWrap>
     <Form
