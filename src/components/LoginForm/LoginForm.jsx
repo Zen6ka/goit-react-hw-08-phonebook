@@ -4,6 +4,9 @@ import{ButtonLog} from '../../pages/Pages.styled'
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { logIn } from '../../redux/auth/auth-fetch';
 import { BlurWrap } from 'pages/Pages.styled';
+import {toast, ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from 'react';
 
 export default function LoginForm () {
   const dispatch = useDispatch();
@@ -11,6 +14,11 @@ export default function LoginForm () {
   const onFinish = values => {
     dispatch(logIn(values));
   };
+
+	// useEffect(() => {
+	// 	if (Number(error) === 400) {toast.error ('Invalid login credentials')};
+	// },
+	// )
 
   return (
     <BlurWrap>
@@ -63,6 +71,7 @@ export default function LoginForm () {
         </ButtonLog>
       </Form.Item>
       </Form>
-      </BlurWrap>
+			<ToastContainer/>
+      </BlurWrap>			
   );
 };

@@ -4,11 +4,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import Notiflix from 'notiflix';
 import { addContact } from '../../redux/fetchData';
 import { selectContacts } from '../../redux/selectors';
+import {toast, ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from 'react';
 
 export default function ContactForm () {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
-  
+  const [localError, setLocalError] = useState('null');
+
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -59,7 +63,14 @@ export default function ContactForm () {
     setNumber('');
   };
 
+	useEffect(() => {
+		
+		if (Number(number).length !== number.length) {toast.error ('Invalid login credentials')};
+	},
+	)
+
     return (
+			<div>
       <Form onSubmit={handleSubmit}>
         <Text>Name</Text>
         <Input
@@ -83,5 +94,7 @@ export default function ContactForm () {
         />
         <Button type="submit">Add Contact</Button>
       </Form>
+			<ToastContainer/>
+			</div>
     );
 }

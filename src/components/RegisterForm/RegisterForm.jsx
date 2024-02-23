@@ -3,10 +3,6 @@ import { register } from '../../redux/auth/auth-fetch';
 import { Form, Input } from 'antd';
 import{ButtonReg} from '../../pages/Pages.styled'
 import { RegBlurWrap } from '../../pages/Pages.styled';
-import toast from 'react-hot-toast';
-import * as Yup from 'yup';
-import { Formik } from 'formik';
-
 
 export default function RegisterForm () {
   const [form] = Form.useForm();
