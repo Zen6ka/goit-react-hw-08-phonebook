@@ -43,19 +43,6 @@ export default function RegisterForm () {
       },
     },
   };
-
-	// const onRegisterSubmit = (values, action) => {
-	// 	dispatch(register(values))
-	// 		.then(() => {
-	// 			toast.success('Registration was successful!');
-	// 		})
-	// 		.catch(error => {
-	// 			toast.error('Oops, something went wrong! Try again later.');
-	// 			console.error('Registration failed:', error);
-	// 		})
-	// 		.finally(() => {
-	// 			action.resetForm();
-	// 		});
 	
   return (
     <RegBlurWrap>
