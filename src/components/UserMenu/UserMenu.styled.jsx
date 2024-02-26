@@ -18,14 +18,13 @@ export const Button = styled.button`
   }
   
   padding: 8px 16px;
-  margin-right: 8px;
+  margin-top: 5px;
   font-size: 14px;
-  border-radius: 16px;
+  border-radius: 6px;
   border: 1px solid;
-  background-color: #3d405b;
-  color:#f4f1de;
-  &:hover {
-    background-color: #e07a5f;
-    color: #f4f1de;;
+  background-color: #3a3d58;
+  :hover {
+    background-color: #e0e0e0;
   }
 `;
+  

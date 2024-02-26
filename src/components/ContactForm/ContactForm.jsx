@@ -27,7 +27,12 @@ export default function ContactForm () {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const contact = {
+		if (isNaN(Number(number))) {
+			return
+		} 
+		
+		
+		const contact = {
       name: name,
       number: number,
     };
@@ -64,8 +69,7 @@ export default function ContactForm () {
   };
 
 	useEffect(() => {
-		
-		if (Number(number).length !== number.length) {toast.error ('Invalid login credentials')};
+		if (isNaN(Number(number))) {toast.error ('Invalid telephone number! Letters cannot be used.')};
 	},
 	)
 
