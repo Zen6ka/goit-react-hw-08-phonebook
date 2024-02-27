@@ -3,34 +3,41 @@ import { register } from '../../redux/auth/auth-fetch';
 import { Form, Input } from 'antd';
 import{ButtonReg} from '../../pages/Pages.styled'
 import { RegBlurWrap } from '../../pages/Pages.styled';
+import toast from 'react-hot-toast';
 
 export default function RegisterForm () {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const { isLoading, error } = useSelector(state => state.auth);
 
-  // const onFinish = values => {
-  //   const { name, email, password, confirm } = values;
-
-  //   if (password === confirm) {
-  //     dispatch(register({ name, email, password }));
-  //     !isLoading && !error && form.resetFields();
-  //   }
-  // };
-
-	const onFinish = async values => {
+  const onFinish = values => {
     const { name, email, password, confirm } = values;
 
     if (password === confirm) {
-      await dispatch(register({ name, email, password }));
-      if (!isLoading && error && error.status === 400) {
-        alert('Error while registering user');
-      } else {
-        form.resetFields();
-      }
-    }
-  };
-
+    //   dispatch(register({ name, email, password }));
+    //   !isLoading && !error && form.resetFields();
+    // }
+		// const showNotification = errorMessage => {
+		// 	alert(errorMessage);
+		// };
+	
+		// if (error && error.status === 400) {
+		// 	showNotification("Error while registering user");
+		dispatch(register(values))
+		.then(() => {
+			toast.success('Registration was successful!');
+		})
+		.catch(error => {
+			toast.error('Oops, something went wrong! Try again later.');
+			console.error('Registration failed:', error);
+		})
+		.finally(() => {
+			action.resetForm();
+		});
+};	
+	}
+};
+	
   const formItemLayout = {
     labelCol: {
       span: 24,
@@ -53,7 +60,7 @@ export default function RegisterForm () {
     },
   };
 	
-  return (
+return (
     <RegBlurWrap>
     <Form
       {...formItemLayout}

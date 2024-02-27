@@ -4,14 +4,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import Notiflix from 'notiflix';
 import { addContact } from '../../redux/fetchData';
 import { selectContacts } from '../../redux/selectors';
-import {toast, ToastContainer} from 'react-toastify'
+import { ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import { useEffect } from 'react';
+
+// import { useEffect } from 'react';
 
 export default function ContactForm () {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
-  const [localError, setLocalError] = useState('null');
+  // const [localError, setLocalError] = useState('null');
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -60,6 +61,13 @@ export default function ContactForm () {
         `Number ${contact.number} is already in contacts!`,
         'Ok'
       );
+			if (isNaN(Number(number))) {
+				Notiflix.Report.warning(
+					'Alert',
+					'Invalid telephone number! Letters cannot be used.',
+					'Ok'
+				);
+			}
       return;
     }
 
@@ -68,10 +76,12 @@ export default function ContactForm () {
     setNumber('');
   };
 
-	useEffect(() => {
-		if (isNaN(Number(number))) {toast.error ('Invalid telephone number! Letters cannot be used.')};
-	},
-	)
+	
+
+	// useEffect(() => {
+	// 	if (isNaN(Number(number))) {toast.error ('Invalid telephone number! Letters cannot be used.')};
+	// },
+	// )
 
     return (
 			<div>

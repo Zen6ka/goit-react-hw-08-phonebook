@@ -121,8 +121,9 @@ function ContactItem({ contact }) {
             type="text"
             value={newNumber}
             onChange={handleNumberChange}
-            pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
-            title="Phone number format could be: +1 555 1234567 or 555 1234567."
+            // pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
+            pattern=" /^[a-zA-Z0-9]+$/"
+						title="Phone number format could be: +1 555 1234567 or 555 1234567."
             required
           />
         </div>
