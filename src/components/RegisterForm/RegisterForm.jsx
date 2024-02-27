@@ -25,9 +25,6 @@ export default function RegisterForm () {
     showNotification("Error while registering user");
   }
 
-
-
-
   const formItemLayout = {
     labelCol: {
       span: 24,
