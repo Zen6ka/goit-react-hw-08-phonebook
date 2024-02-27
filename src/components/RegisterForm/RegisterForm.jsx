@@ -17,6 +17,16 @@ export default function RegisterForm () {
       !isLoading && !error && form.resetFields();
     }
   };
+	const showNotification = errorMessage => {
+    alert(errorMessage);
+  };
+
+  if (error && error.status === 400) {
+    showNotification("Error while registering user");
+  }
+
+
+
 
   const formItemLayout = {
     labelCol: {
