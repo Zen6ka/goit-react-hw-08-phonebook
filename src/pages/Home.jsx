@@ -15,7 +15,7 @@ export default function Home() {
           Hi, {user.name}! <br />
           Welcome to your phonebook. </Text>
         </>) :
-          (<><TextBlurWrap component="h1" variant="h3" color="inherit" gutterBottom>
+          (<><TextBlurWrap component="h1" variant="h3" color="inherit">
             Welcome to the Phonebook! </TextBlurWrap>
             <Text>
               Please log in to your account or register.

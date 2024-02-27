@@ -9,21 +9,27 @@ export default function RegisterForm () {
   const dispatch = useDispatch();
   const { isLoading, error } = useSelector(state => state.auth);
 
-  const onFinish = values => {
+  // const onFinish = values => {
+  //   const { name, email, password, confirm } = values;
+
+  //   if (password === confirm) {
+  //     dispatch(register({ name, email, password }));
+  //     !isLoading && !error && form.resetFields();
+  //   }
+  // };
+
+	const onFinish = async values => {
     const { name, email, password, confirm } = values;
 
     if (password === confirm) {
-      dispatch(register({ name, email, password }));
-      !isLoading && !error && form.resetFields();
+      await dispatch(register({ name, email, password }));
+      if (!isLoading && error && error.status === 400) {
+        alert('Error while registering user');
+      } else {
+        form.resetFields();
+      }
     }
   };
-	const showNotification = errorMessage => {
-    alert(errorMessage);
-  };
-
-  if (error && error.status === 400) {
-    showNotification("Error while registering user");
-  }
 
   const formItemLayout = {
     labelCol: {
