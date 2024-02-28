@@ -5,10 +5,11 @@ import{ButtonReg} from '../../pages/Pages.styled'
 import { RegBlurWrap } from '../../pages/Pages.styled';
 import toast from 'react-hot-toast';
 
+
 export default function RegisterForm () {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
-  const { isLoading, error } = useSelector(state => state.auth);
+  // const { isLoading, error } = useSelector(state => state.auth);
 
   const onFinish = values => {
     const { name, email, password, confirm } = values;
@@ -23,7 +24,7 @@ export default function RegisterForm () {
 	
 		// if (error && error.status === 400) {
 		// 	showNotification("Error while registering user");
-		dispatch(register(values))
+		dispatch(register({ name, email, password }))
 		.then(() => {
 			toast.success('Registration was successful!');
 		})
@@ -32,13 +33,12 @@ export default function RegisterForm () {
 			console.error('Registration failed:', error);
 		})
 		.finally(() => {
-			action.resetForm();
+			form.resetFields();
 		});
 };	
 	}
-};
-	
-  const formItemLayout = {
+
+	const formItemLayout = {
     labelCol: {
       span: 24,
     },
