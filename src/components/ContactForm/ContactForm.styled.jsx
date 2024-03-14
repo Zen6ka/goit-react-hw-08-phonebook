@@ -1,14 +1,20 @@
 import styled from 'styled-components';
+import {
+  Form as FormikForm,
+  Field as FormikField,
+  ErrorMessage as FormikError,
+} from 'formik';
 
-export const Form = styled.form`
+export const Form = styled(FormikForm)`
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
 `;
 
-export const Input = styled.input`
+export const Input = styled(FormikField)`
   padding: 10px;
-  margin-bottom: 10px;
+  max-width: 600px;
+  width: 100%;
   border-radius: 16px;
   border: none;
   outline: 0;
@@ -30,8 +36,16 @@ export const Button = styled.button`
   }
 `;
 
-export const Text = styled.p`
-  margin-bottom: 8px;
+export const Text = styled.label`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
   color: #050a38;
-  font-weight:700;
+  font-weight: 700;
+`;
+
+export const ErrorMessage = styled(FormikError)`
+  color: #cf4545;
+  font-size: 14px;
 `;

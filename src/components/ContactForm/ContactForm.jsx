@@ -1,114 +1,104 @@
-import { useState } from 'react';
-import { Form, Input, Button, Text } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import Notiflix from 'notiflix';
-import { addContact } from '../../redux/fetchData';
+
 import { selectContacts } from '../../redux/selectors';
-import { ToastContainer} from 'react-toastify'
+import { addContact } from '../../redux/fetchData';
+
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import Notiflix from 'notiflix';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// import { useEffect } from 'react';
+import { Form, Input, Button, Text, ErrorMessage } from './ContactForm.styled';
 
-export default function ContactForm () {
-  const dispatch = useDispatch();
+const сontactSchema = Yup.object().shape({
+  name: Yup.string()
+    .trim()
+    .matches(/^[a-zA-Zа-яА-Я'. -]+$/, 'Name may contain only letters.')
+    .required('Required'),
+  number: Yup.string()
+    .trim()
+    .min(7, 'Too Short!')
+    .matches(/^[0-9+ ()-]+$/, 'Please enter a valid phone number.')
+    .required('Required'),
+});
+
+export const ContactForm = () => {
   const contacts = useSelector(selectContacts);
-  // const [localError, setLocalError] = useState('null');
+  const dispatch = useDispatch();
 
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
-
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-  };
-
-  const handleNumberChange = (event) => {
-    setNumber(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-		if (isNaN(Number(number))) {
-			return
-		} 
-		
-		
-		const contact = {
-      name: name,
-      number: number,
-    };
-
-    const isContactExist = contacts.find(
-      ({name}) => name.toLowerCase() === contact.name.toLowerCase()
+  const onAddContact = (newContact, { resetForm }) => {
+    const isExistName = contacts.some(
+      ({ name }) => name.toLowerCase() === newContact.name.toLowerCase()
     );
 
-    if (isContactExist) {
+    const isExistPhone = contacts.some(
+      ({ number }) => number === newContact.number
+    );
+
+    if (isExistName) {
       Notiflix.Report.warning(
         'Alert',
-        `Contact with name ${contact.name} already exists!`,
+        `Contact with name ${newContact.name} already exists!`,
         'Ok'
       );
       return;
     }
 
-    const isNumberExist = contacts.find(
-      ({number}) => contact.number.replace(/\D/g, '') === number.replace(/\D/g, '')
-    );
-
-    if (isNumberExist) {
+    if (isExistPhone) {
       Notiflix.Report.warning(
         'Alert',
-        `Number ${contact.number} is already in contacts!`,
+        `Number ${newContact.number} is already in contacts!`,
         'Ok'
       );
-			if (isNaN(Number(number))) {
-				Notiflix.Report.warning(
-					'Alert',
-					'Invalid telephone number! Letters cannot be used.',
-					'Ok'
-				);
-			}
       return;
     }
 
-    dispatch(addContact(contact));
-    setName('');
-    setNumber('');
+    dispatch(addContact(newContact));
+    resetForm();
   };
 
-	
+  return (
+    <>
+      <Formik
+        initialValues={{
+          name: '',
+          number: '',
+        }}
+        validationSchema={сontactSchema}
+        onSubmit={onAddContact}
+      >
+        <Form autoComplete="off">
+          <Text>
+            Name
+            <Input
+              autoComplete="off"
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Jane Doe"
+              required
+            />
+            <ErrorMessage name="name" component="span" />
+          </Text>
 
-	// useEffect(() => {
-	// 	if (isNaN(Number(number))) {toast.error ('Invalid telephone number! Letters cannot be used.')};
-	// },
-	// )
+          <Text>
+            Number
+            <Input
+              autoComplete="off"
+              type="tel"
+              id="number"
+              name="number"
+              placeholder="111-11-11"
+              required
+            />
+            <ErrorMessage name="number" component="span" />
+          </Text>
 
-    return (
-			<div>
-      <Form onSubmit={handleSubmit}>
-        <Text>Name</Text>
-        <Input
-          type="text"
-          name="name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
-          value={name}
-          onChange={handleNameChange}
-        />
-        <Text>Number</Text>
-        <Input
-          type="tel"
-          name="number"
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
-          value={number}
-          onChange={handleNumberChange}
-        />
-        <Button type="submit">Add Contact</Button>
-      </Form>
-			<ToastContainer/>
-			</div>
-    );
-}
+          <Button type="submit">Add Contact</Button>
+        </Form>
+      </Formik>
+      <ToastContainer />
+    </>
+  );
+};
